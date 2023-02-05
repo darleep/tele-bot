@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Result</title>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center">Your Data is Sumbitted Successfully!!</h1>
+    <div class="card mt-5">
+      <div class="card-body">
+        <h5 class="card-title">Your Roll Number: <span id="roll-number"></span></h5>
+      </div>
+    </div>
+  </div>
+  <script>
+    // get roll number from URL
+    const params = new URLSearchParams(window.location.search);
+    const roll = params.get("roll");
+    // display roll number
+    document.getElementById("roll-number").innerHTML = roll;
+  </script>
+</body>
+</html>
