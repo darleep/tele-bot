@@ -93,7 +93,7 @@ form.addEventListener("submit", e => {
     .then(response => {
       console.log("Success");
       // show success message
-      window.location.href = `success.html?roll=${roll}`;
+      window.history.replaceState({}, "", "result.html?roll="+ roll);
     })
     .catch(error => console.error("Error:", error));
 });
