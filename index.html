@@ -1,58 +1,100 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <style>
-      /* Add some styles for the form */
-      form {
-        width: 400px;
-        margin: 0 auto;
-        padding: 30px;
-        background-color: lightgray;
-        border-radius: 10px;
-      }
-      input[type="text"], input[type="number"], textarea {
-        width: 100%;
-        padding: 12px;
-        margin: 8px 0;
-        box-sizing: border-box;
-        border-radius: 4px;
-        border: 1px solid gray;
-      }
-      input[type="submit"] {
-        width: 100%;
-        padding: 12px;
-        margin-top: 20px;
-        background-color: blue;
-        color: white;
-        border-radius: 4px;
-        border: none;
-        cursor: pointer;
-      }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
+    <title>Form</title>
   </head>
   <body>
-    <!-- The form to collect user information -->
-    <form>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
-      <label for="telegram_id">Telegram ID:</label>
-      <input type="text" id="telegram_id" name="telegram_id" required>
-      <label for="age">Age:</label>
-      <input type="number" id="age" name="age" required>
-      <label for="description">Description:</label>
-      <textarea id="description" name="description"></textarea>
-      <input type="submit" value="Submit">
-    </form>
-    <!-- A button to start a chat with the Telegram bot -->
-    <button id="start-chat-button">Start Chat</button>
-    <!-- JavaScript to handle form submissions and start a chat with the Telegram bot -->
-    <script>
-      const form = document.querySelector('form');
-      const startChatButton = document.querySelector('#start-chat-button');
-      startChatButton.addEventListener('click', () => {
-        window.open(`https://t.me/Ushskdbdigdbrbot?start=user_id_${Date.now()}`);
-      });
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const formData = new FormData(form);
-        // send the form data to your server here
-        // after you receive the user's Telegram ID, store it in the form
+    <div class="container mt-5">
+      <form id="myForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input
+            type="text"
+            class="form-control"
+            id="location"
+            name="location"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="number">Number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="number"
+            name="number"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="roll"></label>
+          <input
+            type="hidden"
+            class="form-control"
+            id="roll"
+            name="roll"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+<script>
+// generate unique roll number
+document.getElementById("roll").value = Math.floor(Math.random() * 1000000);
+
+// submit form data to Google Sheet
+const form = document.getElementById("myForm");
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const name = form.elements.name.value;
+  const location = form.elements.location.value;
+  const roll = form.elements.roll.value;
+  const number = form.elements.number.value;
+
+
+  const url = 'https://script.google.com/macros/s/AKfycby3WI_DsjgWgteIO7P492QrvAN_ADk01jqYABvQn-iqRVzQiGRxvPgEs-TnUIoDW5WGzQ/exec';
+  const params = `?name=${name}&location=${location}&roll=${roll}&number=${number}`;
+  
+  fetch(url + params, { method: "GET" })
+    .then(response => {
+      console.log("Success");
+      // show success message
+      window.location.href = `success.html?roll=${roll}`;
+    })
+    .catch(error => console.error("Error:", error));
+});
+</script>
