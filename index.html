@@ -78,6 +78,17 @@
             name="roll"
             required
           />
+          
+          <div id="reviewForm" style="display: none;">
+           <h3>Please Review Your Information</h3>
+           <p><strong>Name:</strong> <span id="reviewName"></span></p>
+           <p><strong>City:</strong> <span id="reviewCity"></span></p>
+           <p><strong>Area:</strong> <span id="reviewArea"></span></p>
+           <p><strong>Number:</strong> <span id="reviewNumber"></span></p>
+           <button id="submitBtn" class="btn btn-primary">Submit</button>
+           <button id="editBtn" class="btn btn-secondary">Edit</button>
+            </div>
+          
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
@@ -85,6 +96,7 @@
 
     <div id="result"></div>
 
+      
 <script>
 // generate unique roll number
 document.getElementById("roll").value = Math.floor(Math.random() * 1000000);
