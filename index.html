@@ -91,6 +91,8 @@ document.getElementById("roll").value = Math.floor(Math.random() * 1000000);
 
 // submit form data to Google Sheet
 const form = document.getElementById("myForm");
+const reviewForm = document.getElementById("reviewForm");
+
 form.addEventListener("submit", e => {
   e.preventDefault();
   const name = form.elements.name.value;
@@ -98,7 +100,17 @@ form.addEventListener("submit", e => {
   const area = form.elements.area.value;
   const roll = form.elements.roll.value;
   const number = form.elements.number.value;
+  
+  // populate review form with user input
+  document.getElementById("reviewName").textContent = name;
+  document.getElementById("reviewCity").textContent = city;
+  document.getElementById("reviewArea").textContent = area;
+  document.getElementById("reviewNumber").textContent = number;
 
+  // hide myForm and show reviewForm
+  myForm.style.display = "none";
+  reviewForm.style.display = "block";
+});
 
   const url = 'https://script.google.com/macros/s/AKfycbz5Lmy-C_XglAcTtKLARNFZ0Gj1kOPYABhsvqPTZpcd-Bl7vs9ZZsirELt8lKvnjHoH/exec';
   const params = `?name=${name}&city=${city}&area=${area}&roll=${roll}&number=${number}`;
