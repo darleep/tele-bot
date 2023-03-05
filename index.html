@@ -113,6 +113,14 @@ form.addEventListener("submit", e => {
   const roll = form.elements.roll.value;
   const number = form.elements.number.value;
   
+  form.addEventListener("submit", e => {
+  e.preventDefault();
+  const name = form.elements.name.value;
+  const city = form.elements.city.value;
+  const area = form.elements.area.value;
+  const roll = form.elements.roll.value;
+  const number = form.elements.number.value;
+
   // populate review form with user input
   document.getElementById("reviewName").textContent = name;
   document.getElementById("reviewCity").textContent = city;
@@ -122,19 +130,22 @@ form.addEventListener("submit", e => {
   // hide myForm and show reviewForm
   myForm.style.display = "none";
   reviewForm.style.display = "block";
-});
 
   const url = 'https://script.google.com/macros/s/AKfycbz5Lmy-C_XglAcTtKLARNFZ0Gj1kOPYABhsvqPTZpcd-Bl7vs9ZZsirELt8lKvnjHoH/exec';
   const params = `?name=${name}&city=${city}&area=${area}&number=${number}&roll=${roll}`;
-  
+
   fetch(url + params, { method: "GET" })
     .then(response => {
       console.log("Success");
       // show success message
       window.history.replaceState({}, "", `?roll=${roll}`);
       document.getElementById("myForm").style.display = "none";
-      document.getElementById("result").innerHTML = "<h3 class='text-center'>Your Roll No. is " + roll + "</h3>";
+      document.getElementById("result").innerHTML = "<h3 class='text-center'>Thank you for your submission!</h3>";
     })
-    .catch(error => console.error("Error:", error));
-;
-</script>
+    .catch(error => {
+      console.error("Error:", error);
+      // show error message
+      document.getElementById("myForm").style.display = "none";
+      document.getElementById("result").innerHTML = "<h3 class='text-center'>Oops! There was an error submitting your form. Please try again later.</h3>";
+    });
+})})
