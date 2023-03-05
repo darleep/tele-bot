@@ -113,7 +113,7 @@ form.addEventListener("submit", e => {
 });
 
   const url = 'https://script.google.com/macros/s/AKfycbz5Lmy-C_XglAcTtKLARNFZ0Gj1kOPYABhsvqPTZpcd-Bl7vs9ZZsirELt8lKvnjHoH/exec';
-  const params = `?name=${name}&city=${city}&area=${area}&roll=${roll}&number=${number}`;
+  const params = `?name=${name}&city=${city}&area=${area}&number=${number}&roll=${roll}`;
   
   fetch(url + params, { method: "GET" })
     .then(response => {
