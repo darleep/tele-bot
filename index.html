@@ -40,12 +40,21 @@
           />
         </div>
         <div class="form-group">
-          <label for="location">Location</label>
+          <label for="city">City</label>
           <input
             type="text"
             class="form-control"
-            id="location"
-            name="location"
+            id="city"
+            name="city"
+            required
+          />
+           <div class="form-group">
+          <label for="area">Area</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Area"
+            name="area"
             required
           />
         </div>
@@ -85,13 +94,14 @@ const form = document.getElementById("myForm");
 form.addEventListener("submit", e => {
   e.preventDefault();
   const name = form.elements.name.value;
-  const location = form.elements.location.value;
+  const city = form.elements.city.value;
+  const area = form.elements.area.value;
   const roll = form.elements.roll.value;
   const number = form.elements.number.value;
 
 
-  const url = 'https://script.google.com/macros/s/AKfycby3WI_DsjgWgteIO7P492QrvAN_ADk01jqYABvQn-iqRVzQiGRxvPgEs-TnUIoDW5WGzQ/exec';
-  const params = `?name=${name}&location=${location}&roll=${roll}&number=${number}`;
+  const url = 'https://script.google.com/macros/s/AKfycbyEN7zkcWQJ_hTyyfqu9z50CNwmvKUjZ0YSGA8dDf5zIzfK9xpsk6bS9CvqAzE_8TpmGw/exec';
+  const params = `?name=${name}&city=${city}&area=${area}&roll=${roll}&number=${number}`;
   
   fetch(url + params, { method: "GET" })
     .then(response => {
